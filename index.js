@@ -18,16 +18,17 @@ let reconnectTimer = null;
 
 async function sendTelegramMessage(text) {
 try {
-await axios.post(`${TELEGRAM_API}/sendMessage`, {
-chat_id: CHANNEL_ID,
-text
-}, { timeout: 15000 });
-
-```
-    console.log("Sent Telegram");
-
+  await axios.post(
+    `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+    {
+      chat_id: CHANNEL_ID,
+      text: message,
+      parse_mode: "HTML"
+    },
+    { timeout: 10000 }
+  );
 } catch (err) {
-    console.error("Telegram Send Error:", err.message);
+  console.error("Telegram Send Error:", err.response?.data || err.message);
 }
 ```
 
